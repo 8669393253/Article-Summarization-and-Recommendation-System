@@ -1,0 +1,136 @@
+Project Requirements
+
+1. Python Environment
+   - Python 3.7+: The project is built using Python 3.7 or later. Ensure you have the appropriate version of Python installed. You can check your Python version by running:
+   
+     python --version
+ 
+
+2. Python Libraries
+   The following Python libraries are required to run the system. You can install them via pip:
+
+   - transformers: The Hugging Face library for accessing transformer models, such as the one used for article summarization.
+
+     pip install transformers
+
+   
+   - requests_html: Used for scraping articles from URLs.
+
+     pip install requests_html
+
+
+   - beautifulsoup4: A Python library for parsing HTML content, which is used for extracting the text from articles.
+
+     pip install beautifulsoup4
+
+
+   - google-api-python-client: Google API client for interacting with the Google Custom Search API.
+
+     pip install google-api-python-client
+
+
+   - scikit-learn: A machine learning library that provides tools for text vectorization and calculating cosine similarity for recommendations.
+
+     pip install scikit-learn
+
+
+3. Google Custom Search API Setup
+
+To use the Google Custom Search API to fetch similar articles, you need to follow these steps:
+
+Create Google Cloud Project and Enable API:
+
+1. Create a Google Cloud project:
+   - Go to the [Google Cloud Console](https://console.cloud.google.com/), sign in, and create a new project.
+
+2. Enable the Custom Search API:
+   - Search for the Custom Search API in the Google Cloud API Library and enable it for your project.
+
+3. Create API Key:
+   - In the Credentials section of the Google Cloud Console, generate an API Key for your project. You will use this key to authenticate requests to the Google Custom Search API.
+
+4. Create Custom Search Engine (CSE):
+   - Go to the [Custom Search Engine page](https://cse.google.com/cse/) and create a new search engine. Make sure it's set to search the entire web, or configure it to search specific sites if required.
+   - Once created, obtain the **CSE ID** from the control panel.
+
+API Key and CSE ID Configuration:
+   - You can either:
+     - Hardcode the API key and CSE ID into your script (not recommended for production).
+     - Or, store them in a separate file (e.g., `config.json`) and load them dynamically in the script.
+
+4. File Structure
+
+1. article_recommendation.py: 
+   - Main script that implements article summarization, search, and recommendation functionality.
+
+2. user_history.json: 
+   - A JSON file that stores the user’s article history, including the URLs and their corresponding summaries. This file will be automatically created the first time the script runs.
+
+3. requirements.txt:
+   - A file that lists all the Python dependencies needed for the project. You can install the dependencies using:
+
+     pip install -r requirements.txt
+
+
+4.config.json (Optional):
+   - If you want to store your API credentials separately, you can create a `config.json` file in the following format:
+     ```json
+     {
+       "api_key": "YOUR_GOOGLE_API_KEY",
+       "cse_id": "YOUR_CUSTOM_SEARCH_ENGINE_ID"
+     }
+     ```
+
+5. System Requirements
+
+   - Internet Access: The script requires internet access to fetch articles and use the Google Custom Search API.
+   - Memory & CPU: The summarization model and TF-IDF vectorization could be memory-intensive for large amounts of data or long articles, but they should work on typical systems for moderate use cases.
+   - JSON File Handling**: Ensure you have read and write permissions to the directory where the `user_history.json` file will be stored.
+
+
+Installation Guide
+
+Step 1: Install Python and Dependencies
+
+1. Install Python: Download and install Python 3.7 or later from the [official Python website](https://www.python.org/downloads/).
+   
+2. Create a Virtual Environment (Recommended):
+   - It's a good practice to create a virtual environment for Python projects to manage dependencies separately from your system Python.
+
+     python -m venv myenv
+     source myenv/bin/activate  # On Windows, use `myenv\Scripts\activate`
+
+
+3. Install Required Libraries:
+   - Use `pip` to install the libraries listed in `requirements.txt`:
+
+     pip install -r requirements.txt
+
+
+Step 2: Set Up Google Custom Search API
+   
+1. Create a Google Cloud project and enable the Custom Search API (as detailed in the Google API Setup section above).
+   
+2. Obtain the API Key and CSE ID**, and configure them in the script by either hardcoding them or storing them in a separate configuration file (`config.json`).
+
+Step 3: Run the Script
+
+1. Launch the script:
+
+   python article_recommendation.py
+  
+
+2. Enter an article URL when prompted:
+
+   Enter the URL of the article: https://example.com/some-article
+
+
+3. View the summarized article, similar articles, and personalized recommendations.
+
+Optional Enhancements
+
+- Caching for Google Search: To reduce redundant API calls and improve performance, you can implement caching mechanisms to store and reuse search results.
+  
+- Improved Recommendations: As the system grows, consider using a more advanced recommendation algorithm, like collaborative filtering or deep learning models.
+
+- Article Categorization: Introduce article categorization based on content type (e.g., news, blogs, academic), which could improve the relevance of recommendations.
